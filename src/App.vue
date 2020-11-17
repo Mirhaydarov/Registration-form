@@ -1,21 +1,30 @@
 <template>
   <div id="app">
     <Header />
+    <main>
+      <div class="wrap">
+        <Form />
+      </div>
+    </main>
   </div>
 </template>
 
 <script>
+import Form from './components/Form/index.vue';
 import Header from './components/Header/index.vue';
 
 export default {
   name: 'App',
   components: {
+    Form,
     Header,
   },
 };
 </script>
 
 <style lang="scss">
+@import 'styles/media-mixin.scss';
+
 * {
   margin: 0;
   padding: 0;
@@ -24,6 +33,12 @@ export default {
 
 html {
   font-size: 15px;
+  @include media-sm {
+    font-size: 18px;
+  }
+  @include media-lg {
+    font-size: 25px;
+  }
 }
 
 body {
