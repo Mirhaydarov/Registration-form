@@ -3,6 +3,7 @@
     <PersonalData />
     <Address />
     <Passport />
+    <Popup />
     <button
       class="form__submit-btn"
       :class="{'disabled-btn': isInvalid}"
@@ -17,6 +18,7 @@
 import PersonalData from './PersonalData/index.vue';
 import Address from './Address/index.vue';
 import Passport from './Passport/index.vue';
+import Popup from '../Popup/index.vue';
 
 // Utils
 import { eventEmitter } from '../../main';
@@ -33,9 +35,11 @@ export default {
     PersonalData,
     Address,
     Passport,
+    Popup,
   },
   methods: {
     onSubmit() {
+      eventEmitter.$emit('onSubmit');
     },
   },
   computed: {
@@ -47,14 +51,14 @@ export default {
     },
   },
   created() {
+    eventEmitter.$on('isPersonalDataInvalid', (value) => {
+      this.isPersonalDataInvalid = value;
+    });
     eventEmitter.$on('isAddressInvalid', (value) => {
       this.isAddressInvalid = value;
     });
     eventEmitter.$on('isPassportInvalid', (value) => {
       this.isPassportInvalid = value;
-    });
-    eventEmitter.$on('isPersonalDataInvalid', (value) => {
-      this.isPersonalDataInvalid = value;
     });
   },
 };
