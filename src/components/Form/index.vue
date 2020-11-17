@@ -2,6 +2,7 @@
   <form class="form" @submit.prevent="onSubmit">
     <PersonalData />
     <Address />
+    <Passport />
     <button
       class="form__submit-btn"
       :class="{'disabled-btn': isInvalid}"
@@ -15,6 +16,7 @@
 // Components
 import PersonalData from './PersonalData/index.vue';
 import Address from './Address/index.vue';
+import Passport from './Passport/index.vue';
 
 // Utils
 import { eventEmitter } from '../../main';
@@ -24,11 +26,13 @@ export default {
     return {
       isPersonalDataInvalid: true,
       isAddressInvalid: true,
+      isPassportInvalid: true,
     };
   },
   components: {
     PersonalData,
     Address,
+    Passport,
   },
   methods: {
     onSubmit() {
@@ -36,18 +40,21 @@ export default {
   },
   computed: {
     isInvalid() {
-      if (this.isPersonalDataInvalid || this.isAddressInvalid) {
+      if (this.isPersonalDataInvalid || this.isAddressInvalid || this.isPassportInvalid) {
         return true;
       }
       return false;
     },
   },
   created() {
-    eventEmitter.$on('isPersonalDataInvalid', (value) => {
-      this.isPersonalDataInvalid = value;
-    });
     eventEmitter.$on('isAddressInvalid', (value) => {
       this.isAddressInvalid = value;
+    });
+    eventEmitter.$on('isPassportInvalid', (value) => {
+      this.isPassportInvalid = value;
+    });
+    eventEmitter.$on('isPersonalDataInvalid', (value) => {
+      this.isPersonalDataInvalid = value;
     });
   },
 };
