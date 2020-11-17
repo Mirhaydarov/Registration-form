@@ -8,6 +8,8 @@ import App from './App.vue';
 
 Vue.use(Vuelidate);
 
+export const eventEmitter = new Vue();
+
 Vue.config.productionTip = false;
 Vue.config.devtools = true;
 
